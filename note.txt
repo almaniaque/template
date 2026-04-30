@@ -1,0 +1,2 @@
+1 crée un pont entre le fichier csv et le php -> ok
+2 intégrer les valeur dans un tableau -> ok
