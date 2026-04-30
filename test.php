@@ -1,25 +1,51 @@
 <?php
 
-function checkRichWorker() {
-    include "tableau_datas.php"; 
-        $Nom = "";
-        $post = "";      
-        $Salaire = intval(0);
-        
 
-    foreach ($tableau as $ligne) {
+$menu = [
+    "Liste des candidats",
+    "Ajout de candidat ",
+    "Modification des informations d’un candidat ",
+    "Recherche ",
+    "Quitter",
+];
+print_r($menu);
+
+$liste = $menu[0];
+$ajout = $menu[1];
+$modifier = $menu[2];
+$recherche = $menu[3];
+$quitte = $menu[4];
+
+$MenuSelect= readline("entrée le menu souhaité : ");
+
+
+function checkCandidat() {
+    ini_set('auto_detect_line_endings',TRUE);
+    $handle = fopen('hrdata 3.csv','r');
+
+    $listeCDT = [];
+    $detail = [];
     
-        $salaireClean = intval(str_replace([",", "$"], "", $ligne[5]));
-
-        if ($Salaire < $salaireClean) {
-            $Salaire = $salaireClean;
-            $Nom = $ligne[0];
-            $post =  $ligne[1];
-        }
-
+    while ( ($data = fgetcsv($handle, 1000, ";") ) !== FALSE ) {
+        $listeCDT[] = $data;
     }
-print "le salaire le plus elever est : " .$Salaire ."$" .PHP_EOL ."Et la personne qui le touche s'appelle : " .$Nom .PHP_EOL ."Et sont job est : " .$post ;
-}
 
-checkRichWorker();
+    fclose($handle);
+
+    foreach ($listeCDT as $ligne) {
+        if ($nomPark == "check" ) {
+            $result= $ligne[0] ." : " .$ligne[4];
+            $detail[] = $result;
+            
+        }
+        if ($ligne[0] == $nomPark) { 
+            $result= $ligne[0] ." : " .$ligne[4] .", "  ." palce libre : " .$ligne[6];
+            $detail[] = $result;            
+        }
+    }
+    print_r($detail);
+
+}
 ?>
+
+
