@@ -1,39 +1,49 @@
 <?php
 
-function checkWorker($nomVille) {
-    include "tableau_datas.php"; 
 
-    $Nom = [];
-    $Post = [];
-    $Ville = [];
-    $Salaire = [];
+$menu = [
+    "Liste des candidats",
+    "Ajout de candidat ",
+    "Modification des informations d’un candidat ",
+    "Recherche ",
+    "Quitter",
+];
+print_r($menu);
 
-    foreach ($tableau as $ligne) {
+$liste = $menu[0];
+$ajout = $menu[1];
+$modifier = $menu[2];
+$recherche = $menu[3];
+$quitte = $menu[4];
 
-        if ($nomVille == "check") {
-            $Ville[] = $ligne[2];
-        }
+$MenuSelect= readline("entrée le menu souhaité");
 
-        else if ($ligne[2] == $nomVille) {
-            $Ville[] = $ligne[2];
-            $Nom[] = $ligne[0];
-            $Post[] = $ligne[1];
-            $Salaire[] = $ligne[5];
-        }
+
+function checkCandidat() {
+    ini_set('auto_detect_line_endings',TRUE);
+    $handle = fopen('hrdata 3.csv','r');
+
+    $listeCDT = [];
+    $detail = [];
+    
+    while ( ($data = fgetcsv($handle, 1000, ";") ) !== FALSE ) {
+        $listeCDT[] = $data;
     }
 
-    if ($nomVille == "check") {
-        $detail = array_unique($Ville);
-        print_r($detail);
-    } else {
-        print "Nombre de personnes trouvées : " . count($Nom) . PHP_EOL;
-        print_r($Nom);
-               
+    fclose($handle);
+
+    foreach ($listeCDT as $ligne) {
+        if ($nomPark == "check" ) {
+            $result= $ligne[0] ." : " .$ligne[4];
+            $detail[] = $result;
+            
+        }
+        if ($ligne[0] == $nomPark) { 
+            $result= $ligne[0] ." : " .$ligne[4] .", "  ." palce libre : " .$ligne[6];
+            $detail[] = $result;            
+        }
     }
+    print_r($detail);
+
 }
-
-$nomVille = readline("Entrez une ville ou 'check' : ");
-
-checkWorker($nomVille);
-
 ?>
