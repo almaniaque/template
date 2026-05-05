@@ -2,7 +2,7 @@
 
 function checkparking($nomPark) {
     ini_set('auto_detect_line_endings',TRUE);
-    $handle = fopen('occupation-parkings-temps-reel.csv','r');
+    $handle = fopen('https://data.strasbourg.eu/api/explore/v2.1/catalog/datasets/occupation-parkings-temps-reel/exports/csv?lang=fr&timezone=Europe%2FBerlin&use_labels=true&delimiter=%3B','r');
 
     $parking = [];
     $detail = [];
@@ -23,12 +23,15 @@ function checkparking($nomPark) {
             $result= $ligne[0] ." : " .$ligne[4] .", "  ." palce libre : " .$ligne[6];
             $detail[] = $result;            
         }
-    }
-    print_r($detail);
 
+    }
+    
+    return $detail;
 }
-$nomPark = readline("entree le nom du parking ou sinon entree : check : ");
-  
-checkparking($nomPark);
+$nomPark = readline("Entrez le nom du parking ou sinon entrez : check : ");
+
+$resultat = checkparking($nomPark);
+
+print_r($resultat);
 
 ?>
