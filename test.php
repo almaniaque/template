@@ -25,9 +25,9 @@ function viewCandidat() {
                 $ligne[$index] = "Non renseigné";
             }
         }
-        if ($ligne[3] == "NULL" || $ligne[3] == "Non renseigné") {
-            $ligne[3] = age2($ligne[4]);
-        }
+        
+        $ligne[3] = age2($ligne[4]);
+        
 
         $candidats[] = $ligne;
     }
@@ -125,8 +125,8 @@ function selectedCDT($candidats, $selectCDT) {
             echo "Email : " . $ligne[11] . PHP_EOL;
             echo "Profil recherché : " . $ligne[12] . PHP_EOL;
             echo "compétence : " .$ligne[13] .", " .$ligne[14] .", " .$ligne[15] .", " .$ligne[16] .", " .$ligne[17] .", " .$ligne[18] .", " .$ligne[19] .", " .$ligne[20] .", " .$ligne[21] .", " .$ligne[22] .PHP_EOL;
-            echo "---------------------------------------------------------" .PHP_EOL ;
-            echo "Profile Reseau Sociaux : " .PHP_EOL ."Site Web : " .$ligne[23] .PHP_EOL ."Linkedin : "  .$ligne[24] .PHP_EOL ."Viadeo : " .$ligne[25] .PHP_EOL ."Facebook : " .$ligne[26] .PHP_EOL;
+            echo "-------------------------------Profile Reseau Sociaux--------------------------" .PHP_EOL ;
+            echo "Site Web : " .$ligne[23] .PHP_EOL ."Linkedin : "  .$ligne[24] .PHP_EOL ."Viadeo : " .$ligne[25] .PHP_EOL ."Facebook : " .$ligne[26] .PHP_EOL;
             echo "---------------------------------------------------------" .PHP_EOL ;
 
             $trouve = true;
