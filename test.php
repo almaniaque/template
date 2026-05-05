@@ -141,6 +141,15 @@ function selectedCDT($candidats, $selectCDT) {
 $candidats = viewCandidat();
 
 // ajout de candidat 
+function checkValid($saisie) {
+    if (preg_match("/[a-zA-Z]/",$saisie)) {
+        return true;
+
+    } else {
+        return false;
+    } 
+}
+
 
 function ajouter($candidats) {
     $ligne = [];
