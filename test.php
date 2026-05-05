@@ -37,7 +37,6 @@ function viewCandidat() {
     return $candidats;
 }
 
-
 // listing des candidats
 
 function selectCandidat($candidats) {
@@ -94,6 +93,7 @@ function age2($birthdate) {
 }
 
 // affichage des candidat individuellemnt
+
 function selectedCDT($candidats, $selectCDT) {
     $mots = explode(" ", strtolower(trim($selectCDT)));
 
@@ -261,8 +261,7 @@ while (true) {
 
     else if ($MenuSelect == "3") {
         $search = readline("saisisez : un nom, une ville , un age , ou une competence sinon taper < retour > pour revenir au menu pricipale : ");
-        
-        
+                
         if ($search != "retour") {
            
         }
@@ -273,9 +272,6 @@ while (true) {
         break ;
     }
 }
-
-
-
 
 ?>
 
