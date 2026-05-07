@@ -206,14 +206,19 @@ $candidats = viewCandidat();
 
 function ajouter($candidats) {
     $ligne = [];
+    $dernierId = 0;
 
+    foreach ($candidats as $candidat) {
+        if (intval($candidat[0]) > $dernierId) {
+            $dernierId = intval($candidat[0]);
+        }
+    }
 
-
-    $ligne[0] = count($candidats) + 2;
+    $ligne[0] = $dernierId + 1;
     $ligne[1] = demander("Nom : ", "/^[a-zA-ZÀ-ÿ' -]{2,}$/", "Nom invalide.");
     $ligne[2] = demander("Prénom : ", "/^[a-zA-ZÀ-ÿ' -]{2,}$/", "Prénom invalide.");
     $ligne[3] = demander("Age : ", "/^[0-9]{1,3}$/", "Age invalide.");
-    $ligne[4] = demander("Date de naissance jj/mm/aaaa : ", "/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/", "Date invalide.");
+    $ligne[4] = demander("Date de naissance jj/mm/aaaa : ", "/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(19[5-9][0-9]|2[0]{2}[0-8])$/", "Date invalide.");
     $ligne[5] = readline("Adresse : ");
     $ligne[6] = readline("Complément d'adresse : ");
     $ligne[7] = demander("Code postal : ", "/^[0-9]{5}$/", "Code postal invalide.");
@@ -314,7 +319,7 @@ function Modification($candidats, $search) {
         }
 
         else if ($ModifSelect == "2") {
-            $candidats[$indexTrouve][4] = demander("Entrée la Date de naissance jj/mm/aaaa : ", "/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\d{4}$/", "Date invalide.");
+            $candidats[$indexTrouve][4] = demander("Entrée la Date de naissance jj/mm/aaaa : ", "/^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/\(19[5-9][0-9]|2[0]{2}[0-8])$/", "Date invalide.");
             $candidats[$indexTrouve][3] = age2($candidats[$indexTrouve][4]);
         }
 
@@ -370,7 +375,7 @@ function Modification($candidats, $search) {
     }
 }
 
-//validateur de donner conforme
+//validateur de données conformes
 
 function demander($message, $regex, $erreur) {
     while (true) {
