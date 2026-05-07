@@ -31,32 +31,6 @@ $menu = [
     "Quitter",
 ];
 
-// tris des ids et remplacement dans les ids libres
-function trouverIdLibre($candidats) {
-
-    $ids = [];
-
-    // récupération des IDs existants
-    foreach ($candidats as $ligne) {
-        $ids[] = intval($ligne[0]);
-    }
-
-    sort($ids);
-
-    $idLibre = 1;
-
-    foreach ($ids as $id) {
-
-        if ($id == $idLibre) {
-            $idLibre++;
-        }
-        else {
-            break;
-        }
-    }
-
-    return $idLibre;
-}
 
 // lecture des candidats
 
@@ -235,7 +209,13 @@ function ajouter($candidats) {
     $ligne = [];
     $dernierId = 0;
 
-    $ligne[0] = trouverIdLibre($candidats);;
+    foreach ($candidats as $candidat) {
+        if (intval($candidat[0]) > $dernierId) {
+            $dernierId = intval($candidat[0]);
+        }
+    }
+
+    $ligne[0] = $dernierId + 1;
     $ligne[1] = demander("Nom : ", "/^[a-zA-ZÀ-ÿ' -]{2,}$/", "Nom invalide.");
     $ligne[2] = demander("Prénom : ", "/^[a-zA-ZÀ-ÿ' -]{2,}$/", "Prénom invalide.");
     $ligne[3] = demander("Age : ", "/^[0-9]{1,3}$/", "Age invalide.");
@@ -267,9 +247,9 @@ function ajouter($candidats) {
 
 
     if (checkValid($ligne)) {
-        $fp = fopen('hrdata_3.csv', 'a');
-        fputcsv($fp, $ligne, ";");
-        fclose($fp);
+        
+        sauvegarderCandidats($ligne,"add");
+        
 
         echo "Candidat ajouté." . PHP_EOL;
     } else {
@@ -280,20 +260,31 @@ function ajouter($candidats) {
 
 // sauvegarde des modification 
 
-function sauvegarderCandidats($candidats) {
-    $fp = fopen('hrdata_3.csv', 'w');
+function sauvegarderCandidats($candidats,$mode) {
+    switch ($mode) {
+        case "add":
+            $fp = fopen('hrdata_3.csv', 'a');
+            fputcsv($fp, $candidats, ";");
+            
+            break;
+            
+        case "update":
+            $fp = fopen('hrdata_3.csv', 'w');
+            fputcsv($fp, [
+                "Id", "Nom", "Prénom", "Âge", "Date de naissance", "Adresse", "Adresse 1",
+                "Code postal", "ville", "Numéro de téléphone portable", "Numéro de téléphone fixe",
+                "Email", "Profil", "Compétence 1", "Compétence 2", "Compétence 3", "Compétence 4",
+                "Compétence 5", "Compétence 6", "Compétence 7", "Compétence 8", "Compétence 9",
+                "Compétence 10", "Site Web", "Profil Linkedin", "Profil Viadeo", "Profil facebook"
+            ], ";");
 
-    fputcsv($fp, [
-        "Id", "Nom", "Prénom", "Âge", "Date de naissance", "Adresse", "Adresse 1",
-        "Code postal", "ville", "Numéro de téléphone portable", "Numéro de téléphone fixe",
-        "Email", "Profil", "Compétence 1", "Compétence 2", "Compétence 3", "Compétence 4",
-        "Compétence 5", "Compétence 6", "Compétence 7", "Compétence 8", "Compétence 9",
-        "Compétence 10", "Site Web", "Profil Linkedin", "Profil Viadeo", "Profil facebook"
-    ], ";");
-
-    foreach ($candidats as $ligne) {
-        fputcsv($fp, $ligne, ";");
+            foreach ($candidats as $ligne) {
+                fputcsv($fp, $ligne, ";");
+            }
+            break;
     }
+    
+
 
     fclose($fp);
 }
@@ -385,7 +376,7 @@ function Modification($candidats, $search) {
         }
 
         else if ($ModifSelect == "9") {
-            sauvegarderCandidats($candidats);
+            sauvegarderCandidats($candidats,"update");
             echo "Candidat modifié." . PHP_EOL;
             return $candidats;
         }
