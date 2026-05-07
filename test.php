@@ -31,6 +31,33 @@ $menu = [
     "Quitter",
 ];
 
+// tris des ids et remplacement dans les ids libres
+function trouverIdLibre($candidats) {
+
+    $ids = [];
+
+    // récupération des IDs existants
+    foreach ($candidats as $ligne) {
+        $ids[] = intval($ligne[0]);
+    }
+
+    sort($ids);
+
+    $idLibre = 1;
+
+    foreach ($ids as $id) {
+
+        if ($id == $idLibre) {
+            $idLibre++;
+        }
+        else {
+            break;
+        }
+    }
+
+    return $idLibre;
+}
+
 // lecture des candidats
 
 function viewCandidat() {
@@ -208,13 +235,7 @@ function ajouter($candidats) {
     $ligne = [];
     $dernierId = 0;
 
-    foreach ($candidats as $candidat) {
-        if (intval($candidat[0]) > $dernierId) {
-            $dernierId = intval($candidat[0]);
-        }
-    }
-
-    $ligne[0] = $dernierId + 1;
+    $ligne[0] = trouverIdLibre($candidats);;
     $ligne[1] = demander("Nom : ", "/^[a-zA-ZÀ-ÿ' -]{2,}$/", "Nom invalide.");
     $ligne[2] = demander("Prénom : ", "/^[a-zA-ZÀ-ÿ' -]{2,}$/", "Prénom invalide.");
     $ligne[3] = demander("Age : ", "/^[0-9]{1,3}$/", "Age invalide.");
