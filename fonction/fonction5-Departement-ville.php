@@ -1,5 +1,5 @@
 <?php
-function villeDetect() {
+function villeDetect($nbdep) {
     ini_set('auto_detect_line_endings',TRUE);
     $handle = fopen('villes_france.csv','r');
 
@@ -12,7 +12,7 @@ function villeDetect() {
     fclose($handle);
 
     $ville = [] ;
-    $nbdep = readline("entrée un numero de département : ");
+    
 
     foreach ($departements as $ligne) {
         if ($ligne[1] == $nbdep) { 
@@ -22,10 +22,12 @@ function villeDetect() {
             
         }
     }
-    print_r($ville);
+    
     return;
 }
- 
-villeDetect();
+
+$nbdep = readline("entrée un numero de département : ");
+print_r(villeDetect($nbdep));
+
 
 ?>
