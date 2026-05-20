@@ -9,13 +9,11 @@ echo "Masse salariale brut total annuelle : " .Employe::MassSalarialbrutTotal($e
 
 while (true) {
 echo "---------- Menu ----------" .PHP_EOL;
-echo "1. tri par nom dans l'ordre alphabetique croissant " .PHP_EOL;
-echo "2. tri par nom dans l'ordre alphabetique decroissant" .PHP_EOL;
-echo "3. tri par prenom dans l'ordre alphabetique croissant" .PHP_EOL;
-echo "4. tri par prenom dans l'ordre alphabetique decroissant" .PHP_EOL;
-echo "5. tri par service dans l'ordre croissant" .PHP_EOL;
-echo "6. tri par service dans l'ordre decroissant" .PHP_EOL;
-echo "7. retour " .PHP_EOL;
+echo "1. tri dans l'ordre alphabetique croissant " .PHP_EOL;
+echo "2. tri dans l'ordre alphabetique decroissant" .PHP_EOL;
+echo "3. tri par service dans l'ordre croissant" .PHP_EOL;
+echo "4. tri par service dans l'ordre decroissant" .PHP_EOL;
+echo "5. retour " .PHP_EOL;
 
     $tris= readline("quel trie souhaitez vous ? ");
     if ($tris== 1){
@@ -24,19 +22,14 @@ echo "7. retour " .PHP_EOL;
     else if ($tris== 2){
         Afficher(trierEmploye($employe, "nom" , "DESC"));
     }
+
     else if ($tris== 3){
-        Afficher(trierEmploye($employe, "prenom" , "ASC"));
-    }
-    else if ($tris== 4){
-        Afficher(trierEmploye($employe, "prenom" , "DESC"));
-    }
-    else if ($tris== 5){
         Afficher(trierEmploye($employe, "service" , "ASC"));
     }
-    else if ($tris== 6){
+    else if ($tris== 4){
         Afficher(trierEmploye($employe, "service" , "DESC"));
     }
-    else if ($tris== 7){
+    else if ($tris== 5){
         break;
     }
 }
@@ -80,12 +73,12 @@ function trierEmploye($employe, $colonne, $ordre = "ASC") {
         if ($colonne == "nom"){
             $valA = strtolower($a->getNom());
             $valB = strtolower($b->getNom());
+            if (($valA == $valB) == 0) {
+                $valA = strtolower($a->getPrenom());
+                $valB = strtolower($b->getPrenom());
+            }
         }
 
-        if ($colonne == "prenom"){
-            $valA = strtolower($a->getPrenom());
-            $valB = strtolower($b->getPrenom());
-        }
         if ($colonne == "service"){
             $valA = strtolower($a->getService());
             $valB = strtolower($b->getService());

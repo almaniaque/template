@@ -1,5 +1,6 @@
 <?php
-
+require_once("ClassCompte.php");
+require_once("Ref_Compte.php");
 
 class Banque {
     
@@ -10,37 +11,41 @@ class Banque {
 
     public function __construct($nom, $adresse, $CP, $ville ) {
         $this->nom = $nom ;
-        $this->adress = $adresse ;
+        $this->adresse = $adresse ;
         $this->CP = $CP ;
         $this->ville = $ville ;
     }
 
     public function getNom(){
-        $this->nom =$nom ;
+        return $this->nom ;    
     }
     public function setNom(){
-        return $this->nom ;
+        $this->nom =$nom ;    
+    
     }
 
     public function getAdresse(){
-        $this->adresse = $adresse ;
+        return $this->adresse ;    
     }
     public function setAdresse(){
-        return $this->adresse ;
+        $this->adresse = $adresse ;    
+    
     }
 
     public function getCP(){
-        $this->CP = $CP ;
+        return $this->CP ;   
     }
     public function setCP(){
-        return $this->CP ;
+        $this->CP = $CP ;    
+ 
     }
 
     public function getVille(){
-        $this->ville = $ville ;
+        return $this->ville ;    
     }
     public function setVille(){
-        return $this->ville ;
+        $this->ville = $ville ;    
+    
     }
 }
 

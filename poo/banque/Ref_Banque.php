@@ -5,13 +5,18 @@ require_once("ClassBanque.php");
 $banques = [
 
     new Banque (
-        "Banque des pauvre du Nord" ,
+        "B" ,
         "10 rue du pauvre",
         "00999",
-        "Ville des pauvre",
+        "Ville des pauvres",
+    ),
+    new Banque (
+        "A",
+        "3 boulevard des riche",
+        "93000",
+        "ville des riche",
     ),
 
-
-]
+];
 
 ?>

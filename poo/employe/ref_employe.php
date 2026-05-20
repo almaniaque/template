@@ -21,7 +21,7 @@ $employe = [
 
     new Employe(
         "Faidherbe",
-        "Alisson",
+        "Alison",
         "23/03/2010",
         "comptable",
         "30k",
@@ -33,7 +33,7 @@ $employe = [
     new Employe(
         "Gublin",
         "Caroline",
-        "23/03/2026",
+        "23/03/2015",
         "secretaire",
         "26k",
         "RH",
@@ -53,14 +53,14 @@ $employe = [
     ),
 
     new Directeur(
-        "Lesains",
+        "Lesaint",
         "Jerome",
         "23/03/2005",
         "directeur",
         "50k",
         "direction",
         $agence[0],
-        Employe::EnfantEmploye($Enfant, "Lesains"),
+        Employe::EnfantEmploye($Enfant, "Lesaint"),
    ) 
 
 ];
